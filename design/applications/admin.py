@@ -1,4 +1,5 @@
 from django.contrib import admin
+from .forms import ApplicationCheckForm
 from .models import *
 
 
@@ -14,4 +15,5 @@ class AdminCategoryApplication(admin.ModelAdmin):
 
 @admin.register(Application)
 class AdminApplication(admin.ModelAdmin):
+    form = ApplicationCheckForm
     list_display = ("name_app", "category")

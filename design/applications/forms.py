@@ -23,3 +23,23 @@ class CreateApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
         fields = ('name_app', 'desc_app', 'category', 'image_app')
+
+
+class ApplicationCheckForm(forms.ModelForm):
+
+    def clean(self):
+        status_app = self.cleaned_data.get('status_app')
+        image = self.cleaned_data.get('image_admin')
+        comment = self.cleaned_data.get('comment_admin')
+
+        if self.instance.status_app != 'Н':
+            raise ValidationError("Статус можно менять только у новых заявок!")
+
+        if status_app == 'В' and not image:
+            raise ValidationError("Заявке со статусом 'Выполнено' надо прикреплять фотографию дизайна!")
+
+        if status_app == 'П' and not comment:
+            raise ValidationError("Заявке со статусом 'Принята в работу' надо оставлять комментарий!")
+
+
+

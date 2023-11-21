@@ -21,7 +21,7 @@
         <li><strong>Описание:</strong> {{app.desc_app}}</li>
         <li><strong>Категория:</strong> {{app.category}}</li>
         <li><strong>Статус:</strong> {{app.status_app}}</li>
-        {% if app.status_app == 'Н' %}<li><a href="{% url 'delete' app.pk%}">Удалить</a></li>{% endif %}
+        {% if app.status_app == 'Н' %}<li><a href="{% url 'delete' app.pk%}">Удалить заявку</a></li>{% endif %}
         {% if not forloop.last %}<hr>{% endif %}
   {% endfor %}
   </ul>
