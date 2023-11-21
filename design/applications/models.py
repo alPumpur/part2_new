@@ -47,8 +47,9 @@ class Application(models.Model):
     date_app = models.DateTimeField(verbose_name="Временная метка", auto_now_add=True)
     name_app = models.CharField(verbose_name="Название", max_length=50, blank=False)
     desc_app = models.CharField(verbose_name="Описание", max_length=200, blank=False)
-    category = models.ForeignKey(CategoryApplication, on_delete=models.CASCADE, blank=False)
-    image_app = models.ImageField(verbose_name="Фотография", upload_to='images/', blank=False)
+    category = models.ForeignKey(CategoryApplication, on_delete=models.CASCADE, blank=False, verbose_name="Категория")
+    image_app = models.ImageField(verbose_name="Фотография", upload_to='images/', blank=False,
+                                  validators=[FileExtensionValidator(allowed_extensions=['png', 'jpg', 'jpeg', 'bmp'])])
     user = models.ForeignKey(AdvUser, on_delete=models.CASCADE, verbose_name="Пользователь")
 
     STATUS_CHOICES = (
