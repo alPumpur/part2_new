@@ -15,7 +15,7 @@ def index(request):
     return render(request, 'applications/index.html', context)
 
 
-class RegisterView(CreateView):
-    form_class = RegisterForm
-    template_name = 'applications/register.html'
-    success_url = reverse_lazy('login')
+# class RegisterView(CreateView):
+#     form_class = RegisterForm
+#     template_name = 'applications/register.html'
+#     success_url = reverse_lazy('login')
