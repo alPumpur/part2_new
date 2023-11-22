@@ -4,14 +4,15 @@
     <h1>Главная страница</h1>
 
     <h3>Добро пожаловать!</h3>
+
     {% if num_complete %}
     <p>Список последних выполненных заявок:</p>
     <ul style="list-style: none">
     {% for app in num_complete %}
-        <li list-style="none"><strong>Дата:</strong> {{app.date_app}}</li>
-        <li list-style="none"><strong>Название:</strong> {{app.name_app}}</li>
-        <li list-style="none"><strong>Категория:</strong> {{app.category}}</li>
-        <li list-style="none"><img width="200px" max-height="200px" class="img" src="/media/{{ app.image_app }}"></li>
+        <li><strong>Дата:</strong> {{app.date_app}}</li>
+        <li><strong>Название:</strong> {{app.name_app}}</li>
+        <li><strong>Категория:</strong> {{app.category}}</li>
+        <li><img class="img" width="200px" max-height="200px" src="/media/{{ app.image_admin}}"></li>
         {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}
     </ul>
