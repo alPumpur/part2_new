@@ -1,1 +1,1 @@
-# django-second
+# part2_new
