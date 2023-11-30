@@ -5,33 +5,12 @@ services:
    web:
        build:
          dockerfile: ../docker/python/Dockerfile
-         context: ../../eportal
+         context: ../../design
 
        volumes:
-        - ../../eportal:/srv/www/eportal
+        - ../../design:/srv/www/design
        expose:
          - 8080
        ports:
            - 8080:8080
-       command: "gunicorn -c gunicorn.py eportal.wsgi"
-
-   nginx:
-     # при падении будет стараться подняться
-     restart: always
-     # только свежий nginx
-     image: nginx:latest
-     # слушает порт 8080
-     expose:
-       - 80
-     # мапаем порт 80 на его 8080. Тогда сайт будет доступен по адресу localhost. Убедись, что порт у тебя не занят.
-     ports:
-       - "80:80"
-     # монтируем только те директории, в которых лежит статика, т.к. nginx с динамикой не будет работать. Также директорию с логами и файл настройки, который мы подготовили.
-     volumes:
-       - ../../eportal/static:/srv/www/eportal/static
-       - ../../eportal/media:/srv/www/eportal/media
-       - ../../eportal/logs:/srv/www/eportal/logs
-       -  ../docker/nginx:/etc/nginx/conf.d
-     # и nginx зависит от контейнера python. Т.е. python должен быть запущен первым
-     depends_on:
-       - web
+       command: "gunicorn -c gunicorn.py design.wsgi"

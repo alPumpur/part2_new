@@ -11,7 +11,7 @@ worker_class = 'gevent'
 workers = max_workers()
 
 env = {
-    'DJANGO_SETTINGS_MODULE': 'eportal.settings'
+    'DJANGO_SETTINGS_MODULE': 'design.settings'
 }
 
 reload = True
