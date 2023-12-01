@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Главная страница</h1>
+
+    <h3>Добро пожаловать!</h3>
+
+    {% if num_complete %}
+    <p>Список последних выполненных заявок:</p>
+    <ul style="list-style: none">
+    {% for app in num_complete %}
+        <li><strong>Дата:</strong> {{app.date_app}}</li>
+        <li><strong>Название:</strong> {{app.name_app}}</li>
+        <li><strong>Категория:</strong> {{app.category}}</li>
+        <li><img class="img" width="200px" max-height="200px" src="/media/{{ app.image_admin}}"></li>
+        {% if not forloop.last %}<hr>{% endif %}
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>На данный момент выполненных заявок нет</p>
+    {% endif %}
+    <p>Количество заявок находящихся в работе: {{ num_applications }}</p>
+{% endblock %}

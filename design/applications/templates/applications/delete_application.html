@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Удаление заявок</h1>
+
+{% if user.is_authenticated %}
+        {% if object.status_app == 'Н' %}
+            <p>Вы уверены, что хотите удалить заявку?</p>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="submit" action="" value="Да, удалить.">
+            </form>
+        {% else %}
+             <p>Можно удалять только заявки со статусом "Новая"</p>
+        {% endif %}
+{% else %}
+    <p>Для продолжения работы <a href="{% url 'login' %}">войдите</a> или <a href="{% url 'register' %}">зарегистрируйтесь</a></p>
+{% endif %}
+{% endblock %}

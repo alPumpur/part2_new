@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>Профиль пользователя {{ user.username }}</h1>
+<h2>Ваши заявки:</h2>
+{% if applications %}
+    <label for="status_filter">Фильтр по статусу:</label>
+        <select name="status_filter" id="status_filter" onchange="location.href = '{% url 'profile' %}?status_app=' + this.value;">
+            <option value="all" {% if status_filter == 'all' %}selected{% endif %}>Все</option>
+            <option value="Н" {% if status_filter == 'Н' %}selected{% endif %}>Новые</option>
+            <option value="П" {% if status_filter == 'П' %}selected{% endif %}>В работе</option>
+            <option value="В" {% if status_filter == 'В' %}selected{% endif %}>Выполненные</option>
+        </select>
+
+  <ul style="list-style: none">
+  {% for app in applications %}
+        <li><strong>Дата:</strong> {{app.date_app}}</li>
+        <li><strong>Название:</strong> {{app.name_app}}</li>
+        <li><strong>Описание:</strong> {{app.desc_app}}</li>
+        <li><strong>Категория:</strong> {{app.category}}</li>
+        <li><strong>Статус:</strong> {{app.status_app}}</li>
+        {% if app.status_app == 'Н' %}<li><a href="{% url 'delete' app.pk%}">Удалить заявку</a></li>{% endif %}
+        {% if not forloop.last %}<hr>{% endif %}
+  {% endfor %}
+  </ul>
+{% else %}
+    <label for="status_filter">Фильтр по статусу:</label>
+        <select name="status_filter" id="status_filter" onchange="location.href = '{% url 'profile' %}?status_app=' + this.value;">
+            <option value="all" {% if status_filter == 'all' %}selected{% endif %}>Все</option>
+            <option value="Н" {% if status_filter == 'Н' %}selected{% endif %}>Новые</option>
+            <option value="П" {% if status_filter == 'П' %}selected{% endif %}>В работе</option>
+            <option value="В" {% if status_filter == 'В' %}selected{% endif %}>Выполненные</option>
+        </select>
+<h2>Пока у вас нету заявок</h2>
+{% endif %}
+
+{% endblock %}
